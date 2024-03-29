@@ -18,20 +18,42 @@ void setup() {
     // Inicializacion de los servos
     typhonElbow.write(90);
     griffinBase.write(90);
-    natashaClaw.write(90);
-    nemesisArm.write(90);
+    closeNatashaClaw();
+    bendNemesisArm();
 
     delay(2000);
 }
 
 void loop() {
+    stepOne();
+    delay(5000);
+}
 
+
+void openNatashaClaw() {
     natashaClaw.write(180);
+}
 
-    delay(2000);
-
+void closeNatashaClaw() {
     natashaClaw.write(90);
+}
 
-    delay(2000);
 
+void stretchNemesisArm() {
+    nemesisArm.write(180);
+}
+
+void bendNemesisArm() {
+    nemesisArm.write(90);
+}
+
+void stepOne() {
+    delay(1000);
+    openNatashaClaw();
+    delay(1000);
+    stretchNemesisArm();
+    delay(1000);
+    closeNatashaClaw();
+    delay(1000);
+    bendNemesisArm();
 }
