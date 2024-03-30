@@ -9,23 +9,24 @@ Servo natashaClaw; // Garra
 Servo nemesisArm; // Brazo
 
 void setup() {
-    // Inicializacion de los servos
+    // Pines de los servos
     typhonElbow.attach(6);
-    griffinBase.attach(9);
+    griffinBase.attach(3);
     natashaClaw.attach(10);
     nemesisArm.attach(11);
 
     // Inicializacion de los servos
     typhonElbow.write(90);
-    griffinBase.write(90);
+    rotateGriffinBase("center");
     closeNatashaClaw();
     bendNemesisArm();
-
     delay(2000);
 }
 
 void loop() {
     stepOne();
+    delay(5000);
+    stepTwo();
     delay(5000);
 }
 
@@ -74,13 +75,13 @@ void rotateGriffinBase(String rotate) {
     } else if (rotate == "right") {
         griffinBase.write(180);
     } else if(rotate == "center") {
-        griffinBase.write(90);
+        griffinBase.write(85);
     }
 }
 
 void stepTwo() {
     delay(1000);
-    rotateGriffinBase("left");
+    rotateGriffinBase("right");
     delay(1000);
     stretchTyphonElbow();
     delay(1000);
@@ -88,9 +89,9 @@ void stepTwo() {
     delay(1000);
     openNatashaClaw();
     delay(1000);
-    bendTyphonElbow();
-    delay(1000);
     bendNemesisArm();
+    delay(1000);
+    bendTyphonElbow();
     delay(1000);
     closeNatashaClaw();
     delay(1000);
