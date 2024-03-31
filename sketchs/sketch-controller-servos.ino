@@ -16,36 +16,40 @@ void setup() {
     nemesisArm.attach(11);
 
     // Inicializacion de los servos
-    typhonElbow.write(90);
+    bendTyphonElbow();
     rotateGriffinBase("center");
-    closeNatashaClaw();
+    natashaClaw.write(90);
     bendNemesisArm();
     delay(2000);
 }
 
 void loop() {
-    stepOne();
-    delay(5000);
-    stepTwo();
-    delay(5000);
+    stepOneGetBox();
+    delay(2000);
+    stepTwoCheckBoxRIFD();
+    delay(2000);
+    stepThreePutBox();
+    delay(2000);
+    stepFourReturn();
+    delay(2000);
 }
 
 
 void openNatashaClaw() {
-    natashaClaw.write(180);
+    natashaClaw.write(170);
 }
 
-void closeNatashaClaw() {
-    natashaClaw.write(90);
+void closeNatashaClaw(int angle = 90) {
+    natashaClaw.write(angle);
 }
 
 
-void stretchNemesisArm() {
-    nemesisArm.write(180);
+void stretchNemesisArm(int angle = 170) {
+    nemesisArm.write(angle);
 }
 
 void bendNemesisArm() {
-    nemesisArm.write(90);
+    nemesisArm.write(100);
 }
 
 void stretchTyphonElbow() {
@@ -53,20 +57,7 @@ void stretchTyphonElbow() {
 }
 
 void bendTyphonElbow() {
-    typhonElbow.write(90);
-}
-
-
-void stepOne() {
-    delay(1000);
-    openNatashaClaw();
-    delay(1000);
-    stretchNemesisArm();
-    delay(1000);
-    closeNatashaClaw();
-    delay(1000);
-    bendNemesisArm();
-    delay(1000);
+    typhonElbow.write(100);
 }
 
 void rotateGriffinBase(String rotate) {
@@ -79,15 +70,39 @@ void rotateGriffinBase(String rotate) {
     }
 }
 
-void stepTwo() {
+void stepOneGetBox() {
     delay(1000);
-    rotateGriffinBase("right");
+    openNatashaClaw();
+    delay(1000);
+    stretchNemesisArm(155);
+    delay(1000);
+    closeNatashaClaw(100);
+    delay(1000);
+    bendNemesisArm();
+    delay(1000);
+}
+
+void stepTwoCheckBoxRIFD() {
     delay(1000);
     stretchTyphonElbow();
     delay(1000);
     stretchNemesisArm();
+    delay(2000);
+    bendNemesisArm();
+    delay(1000);
+}
+
+void stepThreePutBox() {
+    delay(1000);
+    rotateGriffinBase("right");
+    delay(1000);
+    stretchNemesisArm();
     delay(1000);
     openNatashaClaw();
+    delay(1000);
+}
+
+void stepFourReturn() {
     delay(1000);
     bendNemesisArm();
     delay(1000);
