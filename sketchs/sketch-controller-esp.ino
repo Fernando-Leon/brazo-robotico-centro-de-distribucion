@@ -1,39 +1,44 @@
+#include <ESP32Servo.h>
 
-// Librerias
-#include <Servo.h>
-
-// Definicion de pines (servos)
 Servo typhonElbow; // Codo
 Servo griffinBase; // Base
 Servo natashaClaw; // Garra
 Servo nemesisArm; // Brazo
+ 
+static const int servoNemesis = 13;
+static const int servoTyphon = 12;
+static const int servoNatasha = 14;
+static const int servoGriffind = 27;
+
 
 void setup() {
-    // Pines de los servos
-    typhonElbow.attach(6);
-    griffinBase.attach(3);
-    natashaClaw.attach(10);
-    nemesisArm.attach(11);
-
-    // Inicializacion de los servos
-    bendTyphonElbow();
-    rotateGriffinBase("center");
-    natashaClaw.write(90);
-    bendNemesisArm();
-    delay(2000);
+	nemesisArm.setPeriodHertz(50);    
+	nemesisArm.attach(servoNemesis, 500, 2400); 
+  typhonElbow.setPeriodHertz(50);    
+	typhonElbow.attach(servoTyphon, 500, 2400); 
+  natashaClaw.setPeriodHertz(50);    
+	natashaClaw.attach(servoNatasha, 500, 2400); 
+  griffinBase.setPeriodHertz(50);    
+	griffinBase.attach(servoGriffind, 500, 2400); 
+  bendTyphonElbow();
+  rotateGriffinBase("center");
+  natashaClaw.write(90);
+  bendNemesisArm();
+  delay(2000);
 }
 
 void loop() {
-    stepOneGetBox();
-    delay(2000);
-    stepTwoCheckBoxRIFD();
-    delay(2000);
-    stepThreePutBox();
-    delay(2000);
-    stepFourReturn();
-    delay(2000);
+  stepOneGetBox();
+  delay(2000);
+  stepTwoCheckBoxRIFD();
+  delay(2000);
+  stepThreePutBox();
+  delay(2000);
+  stepFourReturn();
+  delay(2000);
 }
 
+// Funciones del servomotor
 
 void openNatashaClaw() {
     natashaClaw.write(170);
